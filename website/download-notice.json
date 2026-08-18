@@ -1,10 +1,9 @@
 {
-  "version": "v32 🐾",
+  "version": "v33 🐾",
   "title": "Base Update + iOS Emojis",
-  "base": "443.0.0.0.0",
+  "base": "444.0.0.0.13",
   "architecture": "armv7a + armv8a",
   "changelogs": [
-    "switch back to iOS 18.4 emojis",
     "Ads Removed",
     "Clone Package Build",
     "Config Folder Unlocked",
@@ -14,11 +13,11 @@
   "downloads": {
     "v7a": {
       "label": "v7a",
-      "url": "https://zdrive.to/jJD3VlB0Ga5Q"
+      "url": "https://zdrive.to/ex5z2aQ83Kqk"
     },
     "v8a": {
       "label": "v8a",
-      "url": "https://zdrive.to/ex5z26jezKqk"
+      "url": "https://zdrive.to/jJD3Vk5Oza5Q"
     }
   }
 }
