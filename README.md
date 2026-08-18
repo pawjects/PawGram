@@ -1,4 +1,8 @@
-# 🐾 PawGram
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pawjects/PawGram/refs/heads/main/assets/new_logo.png" alt="PawGram Logo" width="120">
+</p>
+
+<h1 align="center" href="https://pawgram-meow.vercel.app/">PawGram</h1>
 
 **An Optimized, Aesthetic Instagram Experience for Legacy & Modern Android Devices**
 

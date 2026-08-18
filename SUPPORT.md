@@ -4,7 +4,7 @@ Need help with PawGram? Here is how you can get support from the PawDevs team an
 
 ## 1. Official Telegram Community
 The fastest and most reliable way to get help, ask questions, or interact with other PawGram users is through our official Telegram group. Our community and admins are highly active here.
-*   **Join the conversation:** [PawGram Official Telegram](https://t.me/pawgramapp) *(Note: Update with your actual invite link)*
+*   **Join the conversation:** [PawGram Official Telegram](https://t.me/pawgramapp)
 
 ## 2. Check the Documentation
 Before asking for help in the Telegram group, please ensure you have read through our provided guides. Most common questions regarding clones, emojis, and updates are already answered:
