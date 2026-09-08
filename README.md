@@ -64,4 +64,4 @@ Your feedback drives development. If you encounter an issue, report it via our G
 PawGram is an independent, community-driven Android project. It is strictly not affiliated with, endorsed by, sponsored by, or connected to Instagram or Meta Platforms, Inc. "Instagram" is a registered trademark of Meta Platforms, Inc. Users remain solely responsible for ensuring their usage complies with official Terms of Service.
 
 ---
-*Designed and maintained with 🐾 by the **PAWJECTS team**.*
+*Crafted and maintained with 🐾 by the **PAWJECTS team**.*
