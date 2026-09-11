@@ -1,7 +1,7 @@
 {
-  "version": "v36 🐾",
+  "version": "v37 🐾",
   "title": "Base Update + iOS Emojis",
-  "base": "447.0.0.0.0",
+  "base": "448.0.0.0.0",
   "architecture": "armv7a + armv8a",
   "changelogs": [
     "Ads Removed",
@@ -13,11 +13,11 @@
   "downloads": {
     "v7a": {
       "label": "v7a",
-      "url": "https://zdrive.to/ex5z2Yvn3Kqk"
+      "url": "https://github.com/pawjects/PawGram/releases/download/test-release-v37/PawGram_v7a_v37_clone.apk"
     },
     "v8a": {
       "label": "v8a",
-      "url": "https://zdrive.to/BnkmWBQ2GR0y"
+      "url": "https://github.com/pawjects/PawGram/releases/download/test-release-v37/PawGram_v8a_v37_clone.apk"
     }
   }
 }
