@@ -2,6 +2,7 @@
 const navItems = [
   { id: "home", icon: "fa-house", label: "Home" },
   { id: "features", icon: "fa-star", label: "Features" },
+  { id: "wiki", icon: "fa-book-open", label: "Wiki" },
   { id: "download", icon: "fa-download", label: "Download" },
   { id: "about-devs", icon: "fa-users", label: "About Devs" },
 ];
@@ -96,6 +97,146 @@ const pages = {
             <div class="btn-group">
                 <a href="#download" class="btn btn-primary"><i class="fa-solid fa-download"></i> Download PawGram</a>
                 <a href="https://github.com/pawjects/PawGram" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-github"></i> View Source</a>
+            </div>
+        </section>
+    `,
+  wiki: `
+        <header class="hero fade-up">
+            <div class="hero-badge"><i class="fa-solid fa-book-open"></i> PawGram Ecosystem</div>
+            <h1>Two builds.<br><span>One idea.</span></h1>
+            <p>Understand the differences between PawGram and PawGram X, explore experimental features, and compare release cycles.</p>
+        </header>
+
+        <section class="features">
+            <h2 class="section-title fade-up">The Core Editions</h2>
+            <div class="grid">
+                <div class="card fade-up" style="transition-delay:.05s">
+                    <div class="card-icon"><i class="fa-solid fa-paw"></i></div>
+                    <h3>PawGram (Core)</h3>
+                    <p>The mainline PawGram build. Focused on practical enhancements, customization, visual changes, developer options, and a fast-moving weekly release cycle.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.10s">
+                    <div class="card-icon" style="color: #b89fff; background: rgba(131, 58, 180, 0.14);"><i class="fa-solid fa-spider"></i></div>
+                    <h3>PawGram X (Experimental)</h3>
+                    <p>The experimental side. X pushes further with advanced configuration, Ghost modes, experimental functionality, and a longer monthly release cycle.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title fade-up">PawGram Core Features</h2>
+            <div class="grid">
+                <div class="card fade-up" style="transition-delay:.05s">
+                    <div class="card-icon"><i class="fa-solid fa-ban"></i></div>
+                    <h3>Ads Removed</h3>
+                    <p>A cleaner browsing experience with the usual ad clutter natively removed from the modified build.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.10s">
+                    <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3>Developer Options</h3>
+                    <p>Internal options are exposed for users who want additional control and experimental feature toggles.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.15s">
+                    <div class="card-icon"><i class="fa-brands fa-apple"></i></div>
+                    <h3>iOS-Inspired Emojis</h3>
+                    <p>An iOS-inspired emoji experience integrated perfectly into the modified Android interface without root.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.20s">
+                    <div class="card-icon"><i class="fa-solid fa-copy"></i></div>
+                    <h3>Clone Builds</h3>
+                    <p>Clone package variants allow supported installations to exist separately from standard Instagram.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title fade-up">PawGram X Features</h2>
+            <div class="grid">
+                <div class="card fade-up" style="transition-delay:.05s">
+                    <div class="card-icon" style="color: #b89fff; background: rgba(131, 58, 180, 0.14);"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>MetaConfig Flags</h3>
+                    <p>Additional MetaConfig-related functionality for experimenting with configuration-controlled features.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.10s">
+                    <div class="card-icon" style="color: #b89fff; background: rgba(131, 58, 180, 0.14);"><i class="fa-regular fa-eye-slash"></i></div>
+                    <h3>Ghost DM & Story</h3>
+                    <p>Experimental functionality designed around reading DMs and viewing Stories without triggering read indications.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.15s">
+                    <div class="card-icon" style="color: #b89fff; background: rgba(131, 58, 180, 0.14);"><i class="fa-solid fa-font"></i></div>
+                    <h3>Premium Story Fonts</h3>
+                    <p>Additional font options unlocked for users who want more creative control over their Story posts.</p>
+                </div>
+                <div class="card fade-up" style="transition-delay:.20s">
+                    <div class="card-icon" style="color: #b89fff; background: rgba(131, 58, 180, 0.14);"><i class="fa-solid fa-file-export"></i></div>
+                    <h3>Config Import / Export</h3>
+                    <p>Export and import supported configurations to simplify custom setups and configuration transfers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title fade-up">Feature Comparison</h2>
+            <div class="card fade-up" style="overflow-x: auto; padding: 0; border-radius: var(--r-card);">
+                <table style="width: 100%; min-width: 600px; border-collapse: collapse; text-align: center;">
+                    <thead style="background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid var(--border);">
+                        <tr>
+                            <th style="padding: 20px 24px; text-align: left; font-family: 'Syne', sans-serif; font-size: 1.1rem; color: #fff;">Feature</th>
+                            <th style="padding: 20px 24px; font-family: 'Syne', sans-serif; font-size: 1.1rem; color: #fff;"><i class="fa-solid fa-paw" style="color: var(--ig-orange);"></i> PawGram</th>
+                            <th style="padding: 20px 24px; font-family: 'Syne', sans-serif; font-size: 1.1rem; color: #fff;"><i class="fa-solid fa-spider" style="color: #b89fff;"></i> PawGram X</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 0.95rem;">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Ads Removed</td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Developer Options</td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Clone Builds & iOS Emojis</td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">MetaConfig Experiments</td>
+                            <td style="padding: 18px 24px; color: var(--muted);">—</td>
+                            <td style="padding: 18px 24px; color: #b89fff;"><i class="fa-solid fa-flask"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Ghost DM & Story View</td>
+                            <td style="padding: 18px 24px; color: var(--muted);">—</td>
+                            <td style="padding: 18px 24px; color: #b89fff;"><i class="fa-solid fa-ghost"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Premium Story Fonts</td>
+                            <td style="padding: 18px 24px; color: var(--muted);">—</td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Config Import / Export</td>
+                            <td style="padding: 18px 24px; color: var(--muted);">—</td>
+                            <td style="padding: 18px 24px; color: #66e59c;"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 18px 24px; text-align: left; color: var(--muted); font-weight: 500;">Update Cycle</td>
+                            <td style="padding: 18px 24px; color: #fff; font-weight: 600;">Weekly</td>
+                            <td style="padding: 18px 24px; color: #fff; font-weight: 600;">Monthly</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="community fade-up">
+            <h2>Ready to paw in?</h2>
+            <p>Get the latest available PawGram and PawGram X builds directly from the official PawGram download hub.</p>
+            <div class="btn-group">
+                <a href="#download" class="btn btn-primary"><i class="fa-solid fa-cloud-arrow-down"></i> Open Download Hub</a>
             </div>
         </section>
     `,
@@ -373,6 +514,7 @@ function updateNavActiveState(activeId) {
   const titleMap = {
     home: "Home",
     features: "Features",
+    wiki: "Wiki",
     download: "Download",
     "about-devs": "About Devs",
   };
