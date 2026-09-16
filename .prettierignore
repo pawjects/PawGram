@@ -1,0 +1,5 @@
+node_modules
+bun.lock
+updater/
+keystore/
+assets/

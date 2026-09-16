@@ -1,0 +1,18 @@
+{
+  "name": "pawgram-website",
+  "version": "1.0.0",
+  "description": "PawGram Website",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'No build step'",
+    "format": "prettier --write \"**/*.{js,json,html,css,md}\""
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.7"
+  }
+}

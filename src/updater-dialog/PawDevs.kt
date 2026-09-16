@@ -12,11 +12,9 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.AsyncTask
-import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.FrameLayout
@@ -28,70 +26,64 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
+/**
+ * Manages the in-app presentation logic for PawGram's updates and welcome dialogs.
+ * Constructs dynamic, stock-Android-styled UI elements programmatically (without XML)
+ * to ensure it runs independently inside the patched host application context.
+ */
 @SuppressLint("StaticFieldLeak")
-object pawdevs {
-
+object PawDevs {
     private const val COLOR_BG = "#202124"
     private const val COLOR_ACCENT = "#8AB4F8"
     private const val COLOR_TEXT_PRIMARY = "#E8EAED"
     private const val COLOR_TEXT_SECONDARY = "#9AA0A6"
+    private const val COLOR_BTN_RIPPLE = "#1A8AB4F8"
     
     private const val PREFS_NAME = "PawGramPrefs"
+    private const val PREF_HIDE_WELCOME = "hide_welcome"
+    private const val PREF_LAST_CHECK = "last_check"
+    private const val UPDATE_CHECK_INTERVAL_MS = 100_000_000L
+    
     private const val JSON_URL = "https://raw.githubusercontent.com/pawjects/PawGram/refs/heads/main/updater/vX.json"
+    private const val GITHUB_URL = "https://github.com/pawjects/PawGram"
 
     fun init(activity: Activity) {
-        val prefs: SharedPreferences = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val hideWelcome = prefs.getBoolean("hide_welcome", false)
-        val lastCheck = prefs.getLong("last_check", 0L)
+        val prefs = getPrefs(activity)
+        val hideWelcome = prefs.getBoolean(PREF_HIDE_WELCOME, false)
+        val lastCheck = prefs.getLong(PREF_LAST_CHECK, 0L)
 
-        // Basic time check logic (simplified from the timestamp hints in the dump)
         if (!hideWelcome) {
-            showStockWelcomeDialog(activity)
-        } else if (System.currentTimeMillis() - lastCheck > 100000000) { 
+            showWelcomeDialog(activity)
+        } else if (System.currentTimeMillis() - lastCheck > UPDATE_CHECK_INTERVAL_MS) { 
             FetchDialogDataTask(activity).execute(JSON_URL)
         }
     }
 
-    private fun showStockWelcomeDialog(activity: Activity) {
-        val dialog = Dialog(activity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(false)
+    private fun getPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    }
 
+    private fun showWelcomeDialog(activity: Activity) {
+        val dialog = createBaseDialog(activity, forceModal = true)
         val card = createStockCard(activity)
         
-        val title = TextView(activity).apply {
-            text = "Welcome"
-            setTextColor(Color.parseColor(COLOR_TEXT_PRIMARY))
-            textSize = 22f
-            typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        val title = createTextView(activity, "Welcome", COLOR_TEXT_PRIMARY, 22f, "sans-serif-medium").apply {
             setPadding(0, 0, 0, applyDimension(activity, 16f))
         }
 
-        val message = TextView(activity).apply {
-            text = "Join Community"
-            setTextColor(Color.parseColor(COLOR_TEXT_SECONDARY))
-            textSize = 14f
-            typeface = Typeface.create("sans-serif", Typeface.NORMAL)
+        val message = createTextView(activity, "Join Community", COLOR_TEXT_SECONDARY, 14f, "sans-serif").apply {
             setLineSpacing(applyDimension(activity, 4f).toFloat(), 1.2f)
         }
 
-        val btnContainer = LinearLayout(activity).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.END
-            setPadding(0, applyDimension(activity, 24f), 0, 0)
+        val btnContainer = createButtonContainer(activity)
+        
+        val btnGitHub = createStockButton(activity, "GitHub") { 
+            openLink(activity, GITHUB_URL) 
         }
-
-        val btnGitHub = createStockButton(activity, "GitHub").apply {
-            setOnClickListener { openLink(activity, "https://github.com/pawjects/PawGram") }
-        }
-
-        val btnDismiss = createStockButton(activity, "Dismiss").apply {
-            setOnClickListener {
-                activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().putBoolean("hide_welcome", true).apply()
-                dialog.dismiss()
-            }
+        
+        val btnDismiss = createStockButton(activity, "Dismiss") {
+            getPrefs(activity).edit().putBoolean(PREF_HIDE_WELCOME, true).apply()
+            dialog.dismiss()
         }
 
         btnContainer.addView(btnGitHub)
@@ -105,58 +97,37 @@ object pawdevs {
         dialog.show()
     }
 
-    private fun showStockUpdateDialog(activity: Activity, data: JSONObject) {
-        val dialog = Dialog(activity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        
+    private fun showUpdateDialog(activity: Activity, data: JSONObject) {
         val forceUpdate = data.optBoolean("ForceUpdate", false)
-        dialog.setCancelable(!forceUpdate)
-        dialog.setCanceledOnTouchOutside(!forceUpdate)
-
+        val dialog = createBaseDialog(activity, forceModal = forceUpdate)
         val card = createStockCard(activity)
 
-        val title = TextView(activity).apply {
-            text = data.optString("Title", "Update available")
-            setTextColor(Color.parseColor(COLOR_TEXT_PRIMARY))
-            textSize = 22f
-            typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
-        }
+        val titleText = data.optString("Title", "Update available")
+        val title = createTextView(activity, titleText, COLOR_TEXT_PRIMARY, 22f, "sans-serif-medium")
 
-        val version = TextView(activity).apply {
-            text = "Version " + data.optString("Version", "")
-            setTextColor(Color.parseColor(COLOR_ACCENT))
-            textSize = 14f
+        val versionText = "Version " + data.optString("Version", "")
+        val version = createTextView(activity, versionText, COLOR_ACCENT, 14f).apply {
             setPadding(0, applyDimension(activity, 4f), 0, applyDimension(activity, 16f))
         }
 
-        val message = TextView(activity).apply {
-            text = data.optString("Changelog", data.optString("Message", ""))
-            setTextColor(Color.parseColor(COLOR_TEXT_SECONDARY))
-            textSize = 14f
-            typeface = Typeface.create("sans-serif", Typeface.NORMAL)
-        }
+        val messageText = data.optString("Changelog", data.optString("Message", ""))
+        val message = createTextView(activity, messageText, COLOR_TEXT_SECONDARY, 14f, "sans-serif")
 
-        val btnContainer = LinearLayout(activity).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.END
-            setPadding(0, applyDimension(activity, 24f), 0, 0)
-        }
+        val btnContainer = createButtonContainer(activity)
 
         if (!forceUpdate) {
-            val btnLater = createStockButton(activity, "Later").apply {
-                setOnClickListener { dialog.dismiss() }
-            }
+            val btnLater = createStockButton(activity, "Later") { dialog.dismiss() }
             btnContainer.addView(btnLater)
         }
 
-        val btnUpdate = createStockButton(activity, "Update").apply {
+        val btnUpdate = createStockButton(activity, "Update") {
+            openLink(activity, data.optString("UpdateLink", ""))
+        }.apply {
             setTextColor(Color.parseColor(COLOR_BG))
             background = GradientDrawable().apply {
                 setColor(Color.parseColor(COLOR_ACCENT))
                 cornerRadius = applyDimension(activity, 8f).toFloat()
             }
-            setOnClickListener { openLink(activity, data.optString("UpdateLink", "")) }
         }
 
         btnContainer.addView(btnUpdate)
@@ -170,6 +141,15 @@ object pawdevs {
         dialog.show()
     }
 
+    private fun createBaseDialog(activity: Activity, forceModal: Boolean): Dialog {
+        return Dialog(activity).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCancelable(!forceModal)
+            setCanceledOnTouchOutside(!forceModal)
+        }
+    }
+
     private fun createStockCard(context: Context): LinearLayout {
         return LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
@@ -178,7 +158,7 @@ object pawdevs {
             background = GradientDrawable().apply {
                 setColor(Color.parseColor(COLOR_BG))
                 cornerRadius = applyDimension(context, 16f).toFloat()
-                setStroke(applyDimension(context, 1f), Color.parseColor("#1A8AB4F8"))
+                setStroke(applyDimension(context, 1f), Color.parseColor(COLOR_BTN_RIPPLE))
             }
             layoutParams = FrameLayout.LayoutParams(
                 applyDimension(context, 320f), 
@@ -189,8 +169,31 @@ object pawdevs {
         }
     }
 
+    private fun createTextView(
+        context: Context, 
+        textVal: String, 
+        colorHex: String, 
+        sizeSp: Float, 
+        fontFamily: String = "sans-serif"
+    ): TextView {
+        return TextView(context).apply {
+            text = textVal
+            setTextColor(Color.parseColor(colorHex))
+            textSize = sizeSp
+            typeface = Typeface.create(fontFamily, Typeface.NORMAL)
+        }
+    }
+
+    private fun createButtonContainer(context: Context): LinearLayout {
+        return LinearLayout(context).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.END
+            setPadding(0, applyDimension(context, 24f), 0, 0)
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    private fun createStockButton(context: Context, textVal: String): TextView {
+    private fun createStockButton(context: Context, textVal: String, onClick: () -> Unit): TextView {
         return TextView(context).apply {
             text = textVal
             setTextColor(Color.parseColor(COLOR_ACCENT))
@@ -200,16 +203,17 @@ object pawdevs {
             val padY = applyDimension(context, 8f)
             setPadding(padX, padY, padX, padY)
             
-            val defaultBg = GradientDrawable().apply {
+            background = GradientDrawable().apply {
                 setColor(Color.TRANSPARENT)
                 cornerRadius = applyDimension(context, 8f).toFloat()
             }
-            background = defaultBg
+
+            setOnClickListener { onClick() }
 
             setOnTouchListener { v, event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        (v.background as GradientDrawable).setColor(Color.parseColor("#1A8AB4F8"))
+                        (v.background as GradientDrawable).setColor(Color.parseColor(COLOR_BTN_RIPPLE))
                     }
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                         (v.background as GradientDrawable).setColor(Color.TRANSPARENT)
@@ -236,7 +240,7 @@ object pawdevs {
     }
 
     @Suppress("DEPRECATION")
-    private class FetchDialogDataTask(val activity: Activity) : AsyncTask<String, Void, String>() {
+    private class FetchDialogDataTask(private val activity: Activity) : AsyncTask<String, Void, String>() {
         override fun doInBackground(vararg params: String): String? {
             return try {
                 val url = URL(params[0])
@@ -253,7 +257,9 @@ object pawdevs {
                     }
                     reader.close()
                     response.toString()
-                } else null
+                } else {
+                    null
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
@@ -266,12 +272,12 @@ object pawdevs {
                 try {
                     val jsonObject = JSONObject(result)
                     
-                    activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                    getPrefs(activity)
                         .edit()
-                        .putLong("last_check", System.currentTimeMillis())
+                        .putLong(PREF_LAST_CHECK, System.currentTimeMillis())
                         .apply()
                         
-                    showStockUpdateDialog(activity, jsonObject)
+                    showUpdateDialog(activity, jsonObject)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

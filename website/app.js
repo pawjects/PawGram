@@ -1,13 +1,13 @@
 // --- Application State & Data ---
 const navItems = [
-    { id: 'home', icon: 'fa-house', label: 'Home' },
-    { id: 'features', icon: 'fa-star', label: 'Features' },
-    { id: 'download', icon: 'fa-download', label: 'Download' },
-    { id: 'about-devs', icon: 'fa-users', label: 'About Devs' }
+  { id: "home", icon: "fa-house", label: "Home" },
+  { id: "features", icon: "fa-star", label: "Features" },
+  { id: "download", icon: "fa-download", label: "Download" },
+  { id: "about-devs", icon: "fa-users", label: "About Devs" },
 ];
 
 const pages = {
-    home: `
+  home: `
         <header class="hero fade-up">
             <div class="hero-badge"><i class="fa-solid fa-paw"></i> Android Client</div>
             <h1>The iOS Instagram<br><span>Experience.</span> Built for Android.</h1>
@@ -49,7 +49,7 @@ const pages = {
             </div>
         </section>
     `,
-    features: `
+  features: `
         <header class="hero fade-up">
             <div class="hero-badge"><i class="fa-solid fa-star"></i> Feature Highlights</div>
             <h1>Everything that makes<br><span>PawGram</span> feel premium.</h1>
@@ -99,7 +99,7 @@ const pages = {
             </div>
         </section>
     `,
-    download: `
+  download: `
         <header class="hero fade-up">
             <div class="hero-badge"><i class="fa-solid fa-download"></i> Official Downloads</div>
             <h1>Install the latest<br><span>PawGram</span> build.</h1>
@@ -135,7 +135,7 @@ const pages = {
             <a href="#features" class="btn btn-primary"><i class="fa-solid fa-star"></i> Review Features</a>
         </section>
     `,
-    'about-devs': `
+  "about-devs": `
         <header class="hero fade-up">
             <div class="hero-badge"><i class="fa-solid fa-users"></i> PAWJECTS Team</div>
             <h1>Community-first development<br>by <span>PAWJECTS.</span></h1>
@@ -169,15 +169,25 @@ const pages = {
                 <a href="https://pawjects.github.io/" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-solid fa-globe"></i> Official Site</a>
             </div>
         </section>
-    `
+    `,
 };
 
 // --- UI Components Generation ---
 function renderNav(activeId) {
-    const navLinks = navItems.map(item => `<a href="#${item.id}" class="${item.id === activeId ? 'active' : ''}"><i class="fa-solid ${item.icon}"></i> ${item.label}</a>`).join('');
-    const mobLinks = navItems.map(item => `<a href="#${item.id}" class="mob-link ${item.id === activeId ? 'active' : ''}"><i class="fa-solid ${item.icon}" style="color:var(--primary)"></i> ${item.label}</a>`).join('');
+  const navLinks = navItems
+    .map(
+      (item) =>
+        `<a href="#${item.id}" class="${item.id === activeId ? "active" : ""}"><i class="fa-solid ${item.icon}"></i> ${item.label}</a>`,
+    )
+    .join("");
+  const mobLinks = navItems
+    .map(
+      (item) =>
+        `<a href="#${item.id}" class="mob-link ${item.id === activeId ? "active" : ""}"><i class="fa-solid ${item.icon}" style="color:var(--primary)"></i> ${item.label}</a>`,
+    )
+    .join("");
 
-    return `
+  return `
     <nav>
         <a class="logo" href="#home" aria-label="PawGram Home">
             <div style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 14px; background: var(--ig-gradient); box-shadow: 0 10px 30px rgba(131, 58, 180, 0.32);">
@@ -197,7 +207,7 @@ function renderNav(activeId) {
 }
 
 function renderFooter() {
-    return `
+  return `
     <footer class="fade-up">
         <div class="footer-links">
             <a href="https://pawjects.github.io/" target="_blank" rel="noopener" class="btn btn-secondary">
@@ -220,161 +230,182 @@ function renderFooter() {
 
 // --- Data Fetching Logic (Retained from original) ---
 function escapeHtml(value) {
-    return String(value)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 async function loadDownloadNotice() {
-    const el = document.getElementById('downloadNotice');
-    if (!el) return;
-    try {
-        const res = await fetch('download-notice.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Fetch failed');
-        const data = await res.json();
-        
-        const changelogs = Array.isArray(data.changelogs) ? data.changelogs : [];
-        const v7a = data.downloads?.v7a;
-        const v8a = data.downloads?.v8a;
+  const el = document.getElementById("downloadNotice");
+  if (!el) return;
+  try {
+    const res = await fetch("download-notice.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("Fetch failed");
+    const data = await res.json();
 
-        el.innerHTML = `
+    const changelogs = Array.isArray(data.changelogs) ? data.changelogs : [];
+    const v7a = data.downloads?.v7a;
+    const v8a = data.downloads?.v8a;
+
+    el.innerHTML = `
             <div class="notice-head">
-                <h3>PawGram ${escapeHtml(data.version || '')}</h3>
-                <p>${escapeHtml(data.title || '')}</p>
+                <h3>PawGram ${escapeHtml(data.version || "")}</h3>
+                <p>${escapeHtml(data.title || "")}</p>
             </div>
             <div class="notice-chip">
-                <span>Base: ${escapeHtml(data.base || '')}</span>
+                <span>Base: ${escapeHtml(data.base || "")}</span>
             </div>
-            <p class="notice-arch">Architecture: ${escapeHtml(data.architecture || '')}</p>
+            <p class="notice-arch">Architecture: ${escapeHtml(data.architecture || "")}</p>
             <h4>Changelogs:</h4>
             <ul class="notice-changelogs">
-                ${changelogs.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                ${changelogs.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
             </ul>
             <div class="notice-actions">
-                ${v7a?.url ? `<a class="btn btn-primary" href="${escapeHtml(v7a.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(v7a.label || 'v7a')}</a>` : ''}
-                ${v8a?.url ? `<a class="btn btn-primary" href="${escapeHtml(v8a.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(v8a.label || 'v8a')}</a>` : ''}
+                ${v7a?.url ? `<a class="btn btn-primary" href="${escapeHtml(v7a.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(v7a.label || "v7a")}</a>` : ""}
+                ${v8a?.url ? `<a class="btn btn-primary" href="${escapeHtml(v8a.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(v8a.label || "v8a")}</a>` : ""}
             </div>
         `;
-    } catch (e) {
-        el.innerHTML = `
+  } catch (e) {
+    el.innerHTML = `
             <h3>Latest Build Notice</h3>
             <p class="notice-loading">Could not load notice JSON. Ensure <code>download-notice.json</code> is available in the directory.</p>
         `;
-    }
+  }
 }
 
 // --- Event Initialization & Observers ---
 function initGlobalEvents() {
-    const progressBar = document.getElementById('scrollProgress');
-    const scrollTopBtn = document.getElementById('scrollTop');
+  const progressBar = document.getElementById("scrollProgress");
+  const scrollTopBtn = document.getElementById("scrollTop");
 
-    // Scroll Logic
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        
-        if (progressBar) progressBar.style.width = (total > 0 ? (scrolled / total * 100).toFixed(1) : 0) + '%';
-        if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', scrolled > 400);
-    }, { passive: true });
+  // Scroll Logic
+  window.addEventListener(
+    "scroll",
+    () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
 
-    if (scrollTopBtn) {
-        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
+      if (progressBar)
+        progressBar.style.width =
+          (total > 0 ? ((scrolled / total) * 100).toFixed(1) : 0) + "%";
+      if (scrollTopBtn)
+        scrollTopBtn.classList.toggle("visible", scrolled > 400);
+    },
+    { passive: true },
+  );
 
-    // Navigation Toggle Logic
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", () =>
+      window.scrollTo({ top: 0, behavior: "smooth" }),
+    );
+  }
 
-    if (navToggle && mobileMenu) {
-        const closeMenu = () => {
-            navToggle.classList.remove('open');
-            mobileMenu.classList.remove('open');
-            navToggle.setAttribute('aria-expanded', 'false');
-        };
+  // Navigation Toggle Logic
+  const navToggle = document.getElementById("navToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-        navToggle.addEventListener('click', e => {
-            e.stopPropagation();
-            const isOpen = mobileMenu.classList.toggle('open');
-            navToggle.classList.toggle('open', isOpen);
-            navToggle.setAttribute('aria-expanded', String(isOpen));
-        });
+  if (navToggle && mobileMenu) {
+    const closeMenu = () => {
+      navToggle.classList.remove("open");
+      mobileMenu.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
 
-        document.addEventListener('click', e => {
-            if (!navToggle.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
-        });
-        
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeMenu();
-        });
-        
-        // Make closeMenu accessible to router
-        window.closeMobileMenu = closeMenu;
-    }
+    navToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = mobileMenu.classList.toggle("open");
+      navToggle.classList.toggle("open", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!navToggle.contains(e.target) && !mobileMenu.contains(e.target))
+        closeMenu();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // Make closeMenu accessible to router
+    window.closeMobileMenu = closeMenu;
+  }
 }
 
 function initPageInteractions() {
-    const fadeEls = document.querySelectorAll('.fade-up');
-    if (fadeEls.length) {
-        const io = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '0px', threshold: 0.08 });
-
-        fadeEls.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                el.classList.add('visible');
-            } else {
-                io.observe(el);
-            }
+  const fadeEls = document.querySelectorAll(".fade-up");
+  if (fadeEls.length) {
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
         });
-    }
+      },
+      { rootMargin: "0px", threshold: 0.08 },
+    );
+
+    fadeEls.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add("visible");
+      } else {
+        io.observe(el);
+      }
+    });
+  }
 }
 
 // --- Routing Engine ---
 function updateNavActiveState(activeId) {
-    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
-    });
-    
-    const titleMap = { home: 'Home', features: 'Features', download: 'Download', 'about-devs': 'About Devs' };
-    document.title = `PawGram - ${titleMap[activeId] || 'Home'}`;
+  document.querySelectorAll(".nav-links a, .mobile-menu a").forEach((link) => {
+    link.classList.toggle(
+      "active",
+      link.getAttribute("href") === `#${activeId}`,
+    );
+  });
+
+  const titleMap = {
+    home: "Home",
+    features: "Features",
+    download: "Download",
+    "about-devs": "About Devs",
+  };
+  document.title = `PawGram - ${titleMap[activeId] || "Home"}`;
 }
 
 function router() {
-    let hash = window.location.hash.slice(1) || 'home';
-    if (!pages[hash]) hash = 'home';
+  let hash = window.location.hash.slice(1) || "home";
+  if (!pages[hash]) hash = "home";
 
-    // Boot shell if empty
-    if (!document.getElementById('nav-container').innerHTML) {
-        document.getElementById('nav-container').innerHTML = renderNav(hash);
-        document.getElementById('footer-container').innerHTML = renderFooter();
-        initGlobalEvents();
-    } else {
-        updateNavActiveState(hash);
-    }
+  // Boot shell if empty
+  if (!document.getElementById("nav-container").innerHTML) {
+    document.getElementById("nav-container").innerHTML = renderNav(hash);
+    document.getElementById("footer-container").innerHTML = renderFooter();
+    initGlobalEvents();
+  } else {
+    updateNavActiveState(hash);
+  }
 
-    // Inject active page view
-    document.getElementById('app-content').innerHTML = pages[hash];
-    
-    // Cleanup & Post-Render hooks
-    if (window.closeMobileMenu) window.closeMobileMenu();
-    window.scrollTo(0, 0);
-    
-    // Defer observation slightly to ensure DOM paints first
-    setTimeout(() => {
-        initPageInteractions();
-        if (hash === 'download') loadDownloadNotice();
-    }, 0);
+  // Inject active page view
+  document.getElementById("app-content").innerHTML = pages[hash];
+
+  // Cleanup & Post-Render hooks
+  if (window.closeMobileMenu) window.closeMobileMenu();
+  window.scrollTo(0, 0);
+
+  // Defer observation slightly to ensure DOM paints first
+  setTimeout(() => {
+    initPageInteractions();
+    if (hash === "download") loadDownloadNotice();
+  }, 0);
 }
 
 // --- Application Boot ---
-window.addEventListener('hashchange', router);
-document.addEventListener('DOMContentLoaded', router);
+window.addEventListener("hashchange", router);
+document.addEventListener("DOMContentLoaded", router);

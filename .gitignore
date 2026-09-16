@@ -1,0 +1,22 @@
+# IDE / OS
+.idea/
+.DS_Store
+Thumbs.db
+*.iml
+
+# Node / Package Manager
+node_modules/
+npm-debug.log
+yarn-error.log
+bun.lockb
+bun.lock
+
+# Logs
+*.log
+
+# ReVanced / Patcher specific artifacts
+out/
+build/
+*.apk
+*.apks
+*.aab

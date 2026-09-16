@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DUMMY / REFERENCE AndroidManifest.xml
+  
+  This file is for reference purposes only. It illustrates the typical Android 
+  context and XML structure that PawGram's patching logic (e.g., CloneGeneralLogic) 
+  expects to find in a decompiled APK during modifications.
+  
+  It is NOT a part of a buildable Android application.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.instagram.android"> 
+    <!-- The package attribute is targeted by CloneGeneralLogic and ClonePackageReplacerLogic -->
+
+    <!-- 
+      Permissions are filtered or renamed by CloneGeneralLogic. 
+      Blacklisted ones are removed, and instances of the old package are renamed.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.instagram.android.permission.C2D_MESSAGE" />
+    <permission android:name="com.instagram.android.permission.C2D_MESSAGE" />
+
+    <!-- 
+      The application label resource is extracted to update strings.xml 
+      Launcher icons in mipmap directories are replaced based on the icon attributes.
+    -->
+    <application
+        android:label="@string/app_name" 
+        android:icon="@mipmap/ig_launcher">
+
+        <!-- 
+          Provider authorities containing the old package name are updated to 
+          the new package name to prevent collisions with the original app.
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.instagram.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+            
+        <provider
+            android:name="com.facebook.secure.fileprovider.SecureFileProvider"
+            android:authorities="com.instagram.android.securefileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <activity android:name="com.pawgram.base.activity.BaseFragmentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>
