@@ -1,7 +1,7 @@
 {
-  "version": "v37 🐾",
+  "version": "v38 🐾",
   "title": "Base Update + iOS Emojis",
-  "base": "448.0.0.0.0",
+  "base": "450.0.0.0.0",
   "architecture": "armv7a + armv8a",
   "changelogs": [
     "Ads Removed",
