@@ -32,11 +32,13 @@ Unlike standard modifications that bloat the application, PawGram focuses on a m
 - 🔄 **In-App OTA Updates:** A built-in, stock-styled updater ensures you are always notified of new PawGram releases and can update seamlessly.
 
 ### 🎨 iOS-Style & Premium UI
+
 - **Native iOS Emojis:** Experience seamless iOS-style emoji rendering across all chats, captions, comments, and stories. This is injected directly into the app resources—no external font packs, specialized keyboards, or root access required.
 - **Custom Branding:** Features a clean, refined PawGram navigation banner and localized premium UI touches.
 
 ### 🛠 Developer-Oriented Tools
-- **Internal Options Unlocked:** PawGram hooks into the obfuscated user session checks to force-unlock Meta's hidden Developer Options. 
+
+- **Internal Options Unlocked:** PawGram hooks into the obfuscated user session checks to force-unlock Meta's hidden Developer Options.
 - **Advanced Control:** Access the internal "MetaConfig" panels to toggle experimental layout features, override server-side flags, and customize hidden app behaviors to your exact liking.
 
 ---
@@ -58,6 +60,7 @@ Official PawGram builds are distributed exclusively through our Telegram Communi
 👉 **[Join the Official PawGram Telegram to Download](https://t.me/pawgramapp)**
 
 ### Quick Setup
+
 1. Download the latest `.apk` from the official Telegram channel.
 2. Enable **Install Unknown Apps** in your Android security settings.
 3. Install the APK and log in securely with your standard credentials.
@@ -67,6 +70,7 @@ Official PawGram builds are distributed exclusively through our Telegram Communi
 ## 📱 Supported Platforms
 
 PawGram is compiled for maximum compatibility across instruction sets:
+
 - **32-bit (ARMv7):** A lightweight build optimized specifically to breathe life into legacy and low-end devices.
 - **64-bit (ARM64):** A high-performance build taking full advantage of modern hardware.
 
@@ -75,6 +79,7 @@ PawGram is compiled for maximum compatibility across instruction sets:
 ## 🤝 Community & Support
 
 Your feedback drives development. If you encounter an issue, want to share a MetaConfig layout, or just want to hang out:
+
 - **Community Chat:** Join our [Telegram Group](https://t.me/pawgramapp)
 - **Bug Reports:** Use the [GitHub Issues](https://github.com/pawjects/PawGram/issues) tracker. Please include your device model, Android version, and steps to reproduce.
 
@@ -82,7 +87,8 @@ Your feedback drives development. If you encounter an issue, want to share a Met
 
 ## 🛠 Contributing & Credits
 
-PawGram is made possible by the incredible open-source Android modding community. 
+PawGram is made possible by the incredible open-source Android modding community.
+
 - Massive thanks to the **PAWJECTS team** and our community testers.
 - If you are a developer looking to contribute to the underlying patch logic, please review our [Contributing Guidelines](.github/CONTRIBUTING.md) and the technical documentation in the `docs/` folder.
 

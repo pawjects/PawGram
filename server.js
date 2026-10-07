@@ -4,12 +4,7 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-app.use("/wiki", express.static(path.join(__dirname, "website", "wiki")));
 app.use(express.static(path.join(__dirname, "website")));
-
-app.get("/wiki*", (req, res) => {
-  res.sendFile(path.join(__dirname, "website", "wiki", "index.html"));
-});
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "website", "index.html"));
