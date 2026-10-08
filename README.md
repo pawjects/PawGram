@@ -13,33 +13,44 @@
   <a href="https://github.com/pawjects/PawGram/commits/main"><img src="https://img.shields.io/github/last-commit/pawjects/PawGram?style=flat-square&color=8AB4F8" alt="Last commit"></a>
 </p>
 
-**An Optimized, Aesthetic Instagram Experience for Legacy & Modern Android Devices**
-
-PawGram is a performance-focused and heavily customized Instagram Alpha fork engineered by the **PAWJECTS team**. It is built to deliver a fluid, highly stable, and visually refined social media experience, bringing power-user tools and aesthetic tweaks to a wide spectrum of Android hardware.
-
----
-
-## 🎯 What Makes PawGram Different?
-
-Unlike standard modifications that bloat the application, PawGram focuses on a minimalist, distraction-free environment. It bridges the gap between power-user developer features and a lightweight footprint. Built on top of the official Instagram Alpha channel, it ensures you have the latest under-the-hood optimizations while retaining absolute control over your app experience.
+<p align="center">
+  <b>A customized Instagram Alpha client for Android with native iOS emojis, ad-free viewing, and unlocked developer options.</b>
+</p>
 
 ---
 
-## ✨ Key Features & Customizations
+## 📌 Overview
 
-- 🚫 **Ad-Free Experience:** A completely cleaned feed. Sponsored posts, ad pods, and interrupting story ads are disabled natively.
-- 👯 **Independent Clone App:** PawGram operates on a distinct package name. You can install and use it directly alongside your official Instagram app without any conflicts.
-- 🔄 **In-App OTA Updates:** A built-in, stock-styled updater ensures you are always notified of new PawGram releases and can update seamlessly.
+**PawGram** is a modified Instagram client for Android maintained by the **PAWJECTS** team, built upon the official Instagram Alpha release channel. It delivers practical quality-of-life improvements and customization options: feed and story ads are removed, default emoji assets are replaced with native iOS emojis, an isolated package name allows running alongside official Instagram, and Meta's internal Developer Options and MetaConfig flags are unlocked directly from the interface.
 
-### 🎨 iOS-Style & Premium UI
+---
 
-- **Native iOS Emojis:** Experience seamless iOS-style emoji rendering across all chats, captions, comments, and stories. This is injected directly into the app resources—no external font packs, specialized keyboards, or root access required.
-- **Custom Branding:** Features a clean, refined PawGram navigation banner and localized premium UI touches.
+## 🎯 What Sets PawGram Apart
 
-### 🛠 Developer-Oriented Tools
+- **Instagram Alpha Base:** Built on the official Alpha stream, providing early access to underlying features and internal test flags.
+- **Independent Clone App:** Uses a separate package name (`paw.instagram.android`), allowing you to install and run PawGram alongside the standard Instagram app without replacing it.
+- **Native iOS Emojis:** Replaces the default emoji font resource so iOS-style emojis render across posts, direct messages, comments, and stories without requiring system font changes or root access.
+- **Distraction-Free Browsing:** Removes sponsored posts, suggested ad pods, and interrupting story ads.
+- **Unlocked Internal Controls:** Access Meta's hidden Developer Options and MetaConfig flags to inspect and toggle internal experiments.
+- **No Expiration Prompts:** Bypasses the standard Alpha build expiration prompt so older builds remain usable.
 
-- **Internal Options Unlocked:** PawGram hooks into the obfuscated user session checks to force-unlock Meta's hidden Developer Options.
-- **Advanced Control:** Access the internal "MetaConfig" panels to toggle experimental layout features, override server-side flags, and customize hidden app behaviors to your exact liking.
+---
+
+## ✨ Features
+
+### 🛡️ Clean Feed & Experience
+- **Ad Removal:** Sponsored feed posts and story advertisements are suppressed natively.
+- **Bypassed Expiration:** Disables the "Alpha build has expired" blocking dialog.
+- **Dual Installation:** Runs independently alongside the official Instagram app with separate application storage and accounts.
+
+### 🎨 Visual & UI Options
+- **Native iOS Emojis:** Bundles Apple-style emoji glyphs directly in the application's font assets for consistent rendering in chats, captions, and story text.
+- **Refined Branding:** Clean top bar header and minimalist interface accents.
+
+### 🛠️ Developer Options & Flag Overrides
+- **Internal Developer Menu:** Long-press the **Home** icon in the bottom navigation bar to open the internal Developer Options menu.
+- **MetaConfig Flags:** Search and toggle experimental UI layouts, direct message features, and client-side flags.
+- **Config File Import:** Easily import pre-configured flag sets (`mc_overrides.json`) directly into the app's configuration folder.
 
 ---
 
@@ -55,51 +66,81 @@ Unlike standard modifications that bloat the application, PawGram focuses on a m
 
 ## 📥 Download & Installation
 
-Official PawGram builds are distributed exclusively through our Telegram Community to guarantee application integrity and provide direct support.
+Official builds are distributed through the PawGram website and community channels:
 
-👉 **[Join the Official PawGram Telegram to Download](https://t.me/pawgramapp)**
+- 🌐 **Website:** [pawgram-meow.vercel.app/#download](https://pawgram-meow.vercel.app/#download)
+- 📢 **Telegram Channel:** [@pawgramapp](https://t.me/pawgramapp)
+- 📦 **GitHub Releases:** [Releases](https://github.com/pawjects/PawGram/releases)
 
-### Quick Setup
+### Setup Instructions
 
-1. Download the latest `.apk` from the official Telegram channel.
-2. Enable **Install Unknown Apps** in your Android security settings.
-3. Install the APK and log in securely with your standard credentials.
-
----
-
-## 📱 Supported Platforms
-
-PawGram is compiled for maximum compatibility across instruction sets:
-
-- **32-bit (ARMv7):** A lightweight build optimized specifically to breathe life into legacy and low-end devices.
-- **64-bit (ARM64):** A high-performance build taking full advantage of modern hardware.
+1. Download the `.apk` package matching your device's architecture (ARM64 or ARMv7).
+2. If prompted, enable **Install unknown apps** for your browser or file manager in Android Settings.
+3. Install the APK and sign in with your account credentials.
+4. *(Optional)* To run alongside your existing Instagram account, leave the official app installed—PawGram uses an independent package name.
 
 ---
 
-## 🤝 Community & Support
+## 📱 Supported Architectures
 
-Your feedback drives development. If you encounter an issue, want to share a MetaConfig layout, or just want to hang out:
+PawGram is built for standard Android hardware running Android 7.0 (Nougat) or newer:
 
-- **Community Chat:** Join our [Telegram Group](https://t.me/pawgramapp)
-- **Bug Reports:** Use the [GitHub Issues](https://github.com/pawjects/PawGram/issues) tracker. Please include your device model, Android version, and steps to reproduce.
+| Architecture | Description | Target Devices |
+| :--- | :--- | :--- |
+| **ARM64-v8a** | 64-bit build | Most modern Android smartphones and tablets |
+| **ARMv7a** | 32-bit build | Legacy and entry-level 32-bit hardware |
 
 ---
 
-## 🛠 Contributing & Credits
+## ⚙️ Applying Custom MetaConfig Presets
 
-PawGram is made possible by the incredible open-source Android modding community.
+To apply a pre-made configuration file:
 
-- Massive thanks to the **PAWJECTS team** and our community testers.
-- If you are a developer looking to contribute to the underlying patch logic, please review our [Contributing Guidelines](.github/CONTRIBUTING.md) and the technical documentation in the `docs/` folder.
+1. Obtain your target configuration file and ensure it is named `mc_overrides.json`.
+2. Open a file manager with access to app storage and navigate to:
+   ```text
+   Android/data/paw.instagram.android/files/mobileconfig/
+   ```
+3. If an existing `mc_overrides.json` file is present, delete or back it up, then paste your new file into this directory.
+4. Go to **Android Settings → Apps → PawGram** and tap **Force Stop**.
+5. Relaunch PawGram to load the new flag overrides into memory.
+
+For additional details, see the [Config Apply Guide](docs/config-apply-guide.md).
+
+---
+
+## 💬 Community & Support
+
+- **Telegram Community:** [t.me/pawgramapp](https://t.me/pawgramapp) — General discussion, build announcements, and user support.
+- **Issue Tracker:** [GitHub Issues](https://github.com/pawjects/PawGram/issues) — Report reproducible bugs, providing your device model, Android version, and PawGram build version.
+- **Documentation & Wiki:** Visit the [PawGram Web Wiki](https://pawgram-meow.vercel.app/#wiki) for setup guides and feature overviews.
+
+---
+
+## 🤝 Contributing
+
+Contributions to documentation, configuration presets, and issue triage are welcomed.
+
+- Please check existing issues and discussions before opening new reports.
+- For guidelines on submitting patches, Smali review files, and style rules, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+- Detailed technical documentation is available in the [`docs/`](docs/) directory.
+
+---
+
+## 📑 Credits & Acknowledgements
+
+- **PAWJECTS Team:** Project development, resource modifications, and ongoing maintenance.
+- **Instafel Team:** Foundational reverse-engineering references, patcher methodology, and structural analysis (see [Credits & Attribution](docs/credits.md)).
+- **Community Contributors & Testers:** Bug reports, device testing, and MetaConfig discoveries.
 
 ---
 
 ## ⚖️ Disclaimer
 
-PawGram is an independent, community-driven Android project. It is strictly not affiliated with, endorsed by, sponsored by, or connected to Instagram or Meta Platforms, Inc. "Instagram" is a registered trademark of Meta Platforms, Inc. Users remain solely responsible for ensuring their usage complies with official Terms of Service.
+PawGram is an independent, community-driven project and is not affiliated with, authorized, maintained, or endorsed by Instagram or Meta Platforms, Inc. "Instagram" is a registered trademark of Meta Platforms, Inc. Use of this modified client is at your own discretion in accordance with applicable terms.
 
 ---
 
-<p align="center">
-  <i>Crafted and maintained by the <b>PAWJECTS team</b>.</i>
-</p>
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
