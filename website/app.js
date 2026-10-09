@@ -246,7 +246,7 @@ async function loadDownloadNotice() {
   const el = document.getElementById("downloadNotice");
   if (!el) return;
   try {
-    const res = await fetch("download-notice.json", { cache: "no-store" });
+    const res = await fetch("release-config.json", { cache: "no-store" });
     if (!res.ok) throw new Error("Fetch failed");
     const data = await res.json();
 
@@ -275,7 +275,7 @@ async function loadDownloadNotice() {
   } catch (e) {
     el.innerHTML = `
             <h3>Latest Build Notice</h3>
-            <p class="notice-loading">Could not load notice JSON. Ensure <code>download-notice.json</code> is available in the directory.</p>
+            <p class="notice-loading">Could not load notice JSON. Ensure <code>release-config.json</code> is available in the directory.</p>
         `;
   }
 }
