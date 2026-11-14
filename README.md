@@ -99,7 +99,7 @@ To apply a pre-made configuration file:
 1. Obtain your target configuration file and ensure it is named `mc_overrides.json`.
 2. Open a file manager with access to app storage and navigate to:
    ```text
-   Android/data/paw.instagram.android/files/mobileconfig/
+   Android/data/paw.instagram.android/data/files/mobileconfig/
    ```
 3. If an existing `mc_overrides.json` file is present, delete or back it up, then paste your new file into this directory.
 4. Go to **Android Settings → Apps → PawGram** and tap **Force Stop**.
