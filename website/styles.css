@@ -420,6 +420,38 @@ nav {
   border-color: rgba(255, 255, 255, 0.16);
 }
 
+.btn-icon-only {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  gap: 0;
+  border-radius: 18px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.btn-icon-only i {
+  font-size: 1.22rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon-only:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.btn-icon-only:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.btn-icon-only:focus-visible {
+  outline: 2px solid var(--ig-yellow);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(252, 175, 69, 0.22);
+}
+
 .features {
   position: relative;
   z-index: 2;
@@ -688,6 +720,258 @@ footer {
   font-size: 0.88em;
 }
 
+.notice-head-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.release-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.release-badge-latest {
+  background: rgba(252, 175, 69, 0.16);
+  border-color: rgba(252, 175, 69, 0.42);
+  color: var(--ig-yellow);
+}
+
+.release-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.version-history-container {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.version-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.version-history-header h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(1.3rem, 2.6vw, 1.65rem);
+  letter-spacing: -0.4px;
+}
+
+.version-history-header h3 i {
+  color: var(--ig-orange);
+}
+
+.version-history-header p {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-top: 2px;
+}
+
+.version-count-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid var(--border);
+  color: #dbe2f8;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.version-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.version-history-empty {
+  padding: 22px 26px;
+}
+
+.version-history-empty p {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.version-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 28px;
+}
+
+.version-item-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.version-item-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.version-item-top h3 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+}
+
+.version-item-subtitle {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.version-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.version-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  font-size: 0.84rem;
+  color: #dbe2f8;
+  font-weight: 500;
+}
+
+.version-meta-chip i {
+  color: var(--ig-yellow);
+  font-size: 0.82rem;
+}
+
+.version-changelog-details {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+.version-changelog-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.version-changelog-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.version-changelog-list {
+  margin-top: 10px;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.version-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.version-item-actions .btn {
+  padding: 11px 20px;
+  font-size: 0.9rem;
+}
+
+.version-history-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.version-history-search i {
+  position: absolute;
+  left: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.version-history-search input {
+  width: 100%;
+  padding: 14px 18px 14px 44px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  backdrop-filter: blur(16px);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.version-history-search input::placeholder {
+  color: var(--muted);
+}
+
+.version-history-search input:focus {
+  outline: none;
+  border-color: rgba(252, 175, 69, 0.5);
+  background: rgba(20, 27, 47, 0.9);
+}
+
+.version-history-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.version-history-controls .btn {
+  padding: 12px 22px;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 1080px) {
   .nav-links {
     gap: 1.35rem;
@@ -711,6 +995,14 @@ footer {
   .btn-group .btn {
     width: 100%;
     max-width: 340px;
+  }
+  .btn-group.btn-group-icons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .btn-group.btn-group-icons .btn-icon-only {
+    width: 52px;
+    max-width: 52px;
   }
 }
 
@@ -768,6 +1060,10 @@ footer {
     width: 100%;
     max-width: 340px;
   }
+  .footer-links .btn.btn-icon-only {
+    width: 52px;
+    max-width: 52px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -776,6 +1072,10 @@ footer {
     text-align: center;
     line-height: 1.35;
     padding: 0.85rem 1rem;
+  }
+  .btn.btn-icon-only {
+    padding: 0;
+    line-height: 1;
   }
   .community {
     padding: 4.1rem 1rem;

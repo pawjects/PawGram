@@ -44,9 +44,9 @@ const pages = {
         <section class="community fade-up">
             <h2>Built with the community.<br>Maintained by PAWJECTS.</h2>
             <p>Follow releases, feature announcements, and improvements from the core team.</p>
-            <div class="btn-group">
-                <a href="https://t.me/pawgramapp" target="_blank" rel="noopener" class="btn btn-primary"><i class="fa-brands fa-telegram"></i> Join Channel</a>
-                <a href="#about-devs" class="btn btn-secondary"><i class="fa-solid fa-users"></i> Meet PAWJECTS</a>
+            <div class="btn-group btn-group-icons">
+                <a href="https://t.me/pawgramapp" target="_blank" rel="noopener" class="btn btn-primary btn-icon-only" aria-label="Join Channel" title="Join Channel"><i class="fa-brands fa-telegram" aria-hidden="true"></i></a>
+                <a href="#about-devs" class="btn btn-secondary btn-icon-only" aria-label="Meet PAWJECTS" title="Meet PAWJECTS"><i class="fa-solid fa-users" aria-hidden="true"></i></a>
             </div>
         </section>
     `,
@@ -115,6 +115,7 @@ const pages = {
                 <div class="card fade-up download-notice" id="downloadNotice" style="transition-delay:.05s">
                     <p class="notice-loading">Loading latest build notice...</p>
                 </div>
+                <div class="version-history-container fade-up" id="versionHistory" style="transition-delay:.08s"></div>
                 <div class="card fade-up" style="transition-delay:.10s">
                     <div class="card-icon"><i class="fa-brands fa-github"></i></div>
                     <h3>GitHub Repository</h3>
@@ -214,14 +215,14 @@ function renderFooter() {
   return `
     <footer class="fade-up">
         <div class="footer-links">
-            <a href="https://pawjects.github.io/" target="_blank" rel="noopener" class="btn btn-secondary">
-                <i class="fa-solid fa-globe"></i> PAWJECTS Official Site
+            <a href="https://pawjects.github.io/" target="_blank" rel="noopener" class="btn btn-secondary btn-icon-only" aria-label="PAWJECTS Official Site" title="PAWJECTS Official Site">
+                <i class="fa-solid fa-globe" aria-hidden="true"></i>
             </a>
-            <a href="https://github.com/pawjects/PawGram" target="_blank" rel="noopener" class="btn btn-secondary">
-                <i class="fa-brands fa-github"></i> GitHub Repository
+            <a href="https://github.com/pawjects/PawGram" target="_blank" rel="noopener" class="btn btn-secondary btn-icon-only" aria-label="GitHub Repository" title="GitHub Repository">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
             </a>
-            <a href="https://t.me/pawjects" target="_blank" rel="noopener" class="btn btn-secondary">
-                <i class="fa-brands fa-telegram"></i> Developer Channel
+            <a href="https://t.me/pawjects" target="_blank" rel="noopener" class="btn btn-secondary btn-icon-only" aria-label="Developer Channel" title="Developer Channel">
+                <i class="fa-brands fa-telegram" aria-hidden="true"></i>
             </a>
         </div>
         <div class="footer-copy">
@@ -242,41 +243,398 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function parseVersionScore(version) {
+  const match = String(version || "").match(/(\d+(?:\.\d+)*)/);
+  if (!match) return null;
+  return match[1].split(".").map((n) => parseInt(n, 10));
+}
+
+function isPreRelease(version) {
+  return /-(alpha|beta|rc)\b/i.test(String(version || ""));
+}
+
+function compareReleasesDesc(a, b) {
+  if (Boolean(a.latest) !== Boolean(b.latest)) {
+    return a.latest ? -1 : 1;
+  }
+  const partsA = parseVersionScore(a.version);
+  const partsB = parseVersionScore(b.version);
+  if (partsA && partsB) {
+    const len = Math.max(partsA.length, partsB.length);
+    for (let i = 0; i < len; i++) {
+      const diff = (partsB[i] || 0) - (partsA[i] || 0);
+      if (diff !== 0) return diff;
+    }
+    const preA = isPreRelease(a.version);
+    const preB = isPreRelease(b.version);
+    if (preA !== preB) return preA ? 1 : -1;
+  }
+  return 0;
+}
+
+const CONSTANT_RELEASE_META = Object.freeze({
+  title: "Base Update + iOS Emojis",
+  architecture: "armv7a + armv8a",
+  changelogs: Object.freeze([
+    "Ads Removed",
+    "Clone Package Build",
+    "Config Folder Unlocked",
+    "Developer Options Enabled",
+    "Build Expired Popup Removed",
+  ]),
+});
+
+function normalizeReleases(data) {
+  const jsonDefaults =
+    data && typeof data === "object" && !Array.isArray(data) && data.defaults
+      ? data.defaults
+      : {};
+
+  let list = [];
+  if (Array.isArray(data)) {
+    list = data;
+  } else if (Array.isArray(data?.releases)) {
+    list = data.releases;
+  } else if (data && typeof data === "object" && data.version) {
+    list = [data];
+  }
+
+  return list
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      ...CONSTANT_RELEASE_META,
+      ...jsonDefaults,
+      ...item,
+      base: item.base || item.versionCode || "",
+      changelogs: CONSTANT_RELEASE_META.changelogs,
+    }))
+    .sort(compareReleasesDesc);
+}
+
+function getDownloadEntries(downloads) {
+  if (!downloads) return [];
+  if (Array.isArray(downloads)) {
+    return downloads
+      .map((item, idx) =>
+        typeof item === "string"
+          ? { label: `Download ${idx + 1}`, url: item }
+          : item,
+      )
+      .filter((item) => item && item.url);
+  }
+  if (typeof downloads === "object") {
+    return Object.entries(downloads)
+      .filter(([, value]) =>
+        typeof value === "string" ? Boolean(value) : Boolean(value && value.url),
+      )
+      .map(([key, value]) =>
+        typeof value === "string"
+          ? { label: key, url: value }
+          : {
+              label: value.label || key,
+              url: value.url,
+            },
+      );
+  }
+  return [];
+}
+
+function renderLatestReleaseCard(release) {
+  const changelogs = Array.isArray(release.changelogs)
+    ? release.changelogs
+    : [];
+  const downloads = getDownloadEntries(release.downloads);
+  const releaseDate = release.date || release.releaseDate;
+
+  return `
+            <div class="notice-head">
+                <div class="notice-head-top">
+                    <h3>PawGram ${escapeHtml(release.version || "")}</h3>
+                    <span class="release-badge release-badge-latest"><i class="fa-solid fa-star"></i> Latest Release</span>
+                </div>
+                ${release.title ? `<p>${escapeHtml(release.title)}</p>` : ""}
+                ${releaseDate ? `<span class="release-date"><i class="fa-regular fa-calendar"></i> ${escapeHtml(releaseDate)}</span>` : ""}
+            </div>
+            ${
+              release.base
+                ? `<div class="notice-chip">
+                <span>Base: ${escapeHtml(release.base)}</span>
+            </div>`
+                : ""
+            }
+            ${release.architecture ? `<p class="notice-arch">Architecture: ${escapeHtml(release.architecture)}</p>` : ""}
+            ${
+              changelogs.length
+                ? `<h4>Changelogs:</h4>
+            <ul class="notice-changelogs">
+                ${changelogs.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>`
+                : ""
+            }
+            ${
+              downloads.length
+                ? `<div class="notice-actions">
+                ${downloads
+                  .map(
+                    (dl) =>
+                      `<a class="btn btn-primary" href="${escapeHtml(dl.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(dl.label)}</a>`,
+                  )
+                  .join("")}
+            </div>`
+                : ""
+            }
+        `;
+}
+
+function renderOlderReleaseItem(release) {
+  const changelogs = Array.isArray(release.changelogs)
+    ? release.changelogs
+    : [];
+  const downloads = getDownloadEntries(release.downloads);
+  const releaseDate = release.date || release.releaseDate;
+
+  return `
+            <article class="card version-item">
+                <div class="version-item-header">
+                    <div class="version-item-title-group">
+                        <div class="version-item-top">
+                            <h3>PawGram ${escapeHtml(release.version || "")}</h3>
+                            <span class="release-badge">Archived</span>
+                        </div>
+                        ${release.title ? `<p class="version-item-subtitle">${escapeHtml(release.title)}</p>` : ""}
+                    </div>
+                    <div class="version-item-meta">
+                        ${release.base ? `<span class="version-meta-chip"><i class="fa-solid fa-layer-group"></i> Base: ${escapeHtml(release.base)}</span>` : ""}
+                        ${release.architecture ? `<span class="version-meta-chip"><i class="fa-solid fa-microchip"></i> ${escapeHtml(release.architecture)}</span>` : ""}
+                        ${releaseDate ? `<span class="version-meta-chip"><i class="fa-regular fa-calendar"></i> ${escapeHtml(releaseDate)}</span>` : ""}
+                    </div>
+                </div>
+                ${
+                  changelogs.length
+                    ? `<details class="version-changelog-details">
+                    <summary><i class="fa-solid fa-list-ul"></i> Changelog (${changelogs.length} ${changelogs.length === 1 ? "item" : "items"})</summary>
+                    <ul class="version-changelog-list">
+                        ${changelogs.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                    </ul>
+                </details>`
+                    : ""
+                }
+                ${
+                  downloads.length
+                    ? `<div class="version-item-actions">
+                    ${downloads
+                      .map(
+                        (dl) =>
+                          `<a class="btn btn-secondary" href="${escapeHtml(dl.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> ${escapeHtml(dl.label)}</a>`,
+                      )
+                      .join("")}
+                </div>`
+                    : ""
+                }
+            </article>
+        `;
+}
+
+const OLDER_VERSIONS_INITIAL_LIMIT = 5;
+const OLDER_VERSIONS_STEP = 10;
+
+let versionHistoryState = {
+  releases: [],
+  query: "",
+  visibleLimit: OLDER_VERSIONS_INITIAL_LIMIT,
+};
+
+function getFilteredOlderReleases() {
+  const q = versionHistoryState.query.trim().toLowerCase();
+  if (!q) return versionHistoryState.releases;
+  return versionHistoryState.releases.filter((release) => {
+    const haystack = [
+      release.version,
+      release.title,
+      release.base,
+      release.architecture,
+      release.date || release.releaseDate,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+function renderVersionHistoryListMarkup() {
+  const filtered = getFilteredOlderReleases();
+  const isSearching = Boolean(versionHistoryState.query.trim());
+  const visible = isSearching
+    ? filtered
+    : filtered.slice(0, versionHistoryState.visibleLimit);
+
+  if (!filtered.length) {
+    return `
+        <div class="card version-history-empty">
+            <p>No archived releases match "${escapeHtml(versionHistoryState.query.trim())}".</p>
+        </div>
+    `;
+  }
+
+  const remaining = filtered.length - visible.length;
+  const controlsHtml =
+    !isSearching && filtered.length > OLDER_VERSIONS_INITIAL_LIMIT
+      ? `<div class="version-history-controls">
+            ${
+              remaining > 0
+                ? `<button type="button" class="btn btn-secondary" id="showMoreVersionsBtn">
+                    <i class="fa-solid fa-chevron-down"></i> Show ${Math.min(remaining, OLDER_VERSIONS_STEP)} More (${remaining} remaining)
+                </button>
+                <button type="button" class="btn btn-secondary" id="showAllVersionsBtn">
+                    <i class="fa-solid fa-layer-group"></i> Show All (${filtered.length})
+                </button>`
+                : `<button type="button" class="btn btn-secondary" id="collapseVersionsBtn">
+                    <i class="fa-solid fa-chevron-up"></i> Show Less
+                </button>`
+            }
+        </div>`
+      : "";
+
+  return `
+        <div class="version-history-list">
+            ${visible.map((release) => renderOlderReleaseItem(release)).join("")}
+        </div>
+        ${controlsHtml}
+    `;
+}
+
+function bindVersionHistoryEvents() {
+  const searchInput = document.getElementById("versionSearchInput");
+  const listContainer = document.getElementById("versionHistoryListWrap");
+
+  const updateList = () => {
+    if (!listContainer) return;
+    listContainer.innerHTML = renderVersionHistoryListMarkup();
+    bindListButtons();
+  };
+
+  const bindListButtons = () => {
+    const showMoreBtn = document.getElementById("showMoreVersionsBtn");
+    const showAllBtn = document.getElementById("showAllVersionsBtn");
+    const collapseBtn = document.getElementById("collapseVersionsBtn");
+
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener("click", () => {
+        versionHistoryState.visibleLimit += OLDER_VERSIONS_STEP;
+        updateList();
+      });
+    }
+    if (showAllBtn) {
+      showAllBtn.addEventListener("click", () => {
+        versionHistoryState.visibleLimit = versionHistoryState.releases.length;
+        updateList();
+      });
+    }
+    if (collapseBtn) {
+      collapseBtn.addEventListener("click", () => {
+        versionHistoryState.visibleLimit = OLDER_VERSIONS_INITIAL_LIMIT;
+        updateList();
+      });
+    }
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      versionHistoryState.query = e.target.value;
+      updateList();
+    });
+  }
+
+  bindListButtons();
+}
+
+function renderVersionHistory(olderReleases) {
+  versionHistoryState = {
+    releases: olderReleases,
+    query: "",
+    visibleLimit: OLDER_VERSIONS_INITIAL_LIMIT,
+  };
+
+  const countLabel = `${olderReleases.length} ${olderReleases.length === 1 ? "release" : "releases"}`;
+
+  if (!olderReleases.length) {
+    return `
+            <div class="version-history-header">
+                <div>
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Older Versions</h3>
+                    <p>Previous builds remain accessible here for compatibility or rollback.</p>
+                </div>
+                <span class="version-count-pill">${escapeHtml(countLabel)}</span>
+            </div>
+            <div class="card version-history-empty">
+                <p>No older versions are archived yet. When newer releases are added to <code>release-config.json</code>, previous builds will automatically appear here.</p>
+            </div>
+        `;
+  }
+
+  const searchBarHtml =
+    olderReleases.length > 3
+      ? `<div class="version-history-search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="versionSearchInput"
+              placeholder="Filter older versions by version or base (e.g. v24, 440)..."
+              aria-label="Filter older versions"
+            />
+        </div>`
+      : "";
+
+  return `
+        <div class="version-history-header">
+            <div>
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Older Versions</h3>
+                <p>Previous builds remain accessible here for compatibility or rollback.</p>
+            </div>
+            <span class="version-count-pill">${escapeHtml(countLabel)}</span>
+        </div>
+        ${searchBarHtml}
+        <div id="versionHistoryListWrap">
+            ${renderVersionHistoryListMarkup()}
+        </div>
+    `;
+}
+
 async function loadDownloadNotice() {
   const el = document.getElementById("downloadNotice");
+  const historyEl = document.getElementById("versionHistory");
   if (!el) return;
   try {
     const res = await fetch("release-config.json", { cache: "no-store" });
     if (!res.ok) throw new Error("Fetch failed");
     const data = await res.json();
+    const releases = normalizeReleases(data);
 
-    const changelogs = Array.isArray(data.changelogs) ? data.changelogs : [];
-    const v7a = data.downloads?.v7a;
-    const v8a = data.downloads?.v8a;
-
-    el.innerHTML = `
-            <div class="notice-head">
-                <h3>PawGram ${escapeHtml(data.version || "")}</h3>
-                <p>${escapeHtml(data.title || "")}</p>
-            </div>
-            <div class="notice-chip">
-                <span>Base: ${escapeHtml(data.base || "")}</span>
-            </div>
-            <p class="notice-arch">Architecture: ${escapeHtml(data.architecture || "")}</p>
-            <h4>Changelogs:</h4>
-            <ul class="notice-changelogs">
-                ${changelogs.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-            </ul>
-            <div class="notice-actions">
-                ${v7a?.url ? `<a class="btn btn-primary" href="${escapeHtml(v7a.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(v7a.label || "v7a")}</a>` : ""}
-                ${v8a?.url ? `<a class="btn btn-primary" href="${escapeHtml(v8a.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(v8a.label || "v8a")}</a>` : ""}
-            </div>
+    if (!releases.length) {
+      el.innerHTML = `
+            <h3>Latest Build Notice</h3>
+            <p class="notice-loading">No releases found in <code>release-config.json</code>.</p>
         `;
+      if (historyEl) historyEl.innerHTML = renderVersionHistory([]);
+      return;
+    }
+
+    const [latest, ...olderReleases] = releases;
+    el.innerHTML = renderLatestReleaseCard(latest);
+    if (historyEl) {
+      historyEl.innerHTML = renderVersionHistory(olderReleases);
+      bindVersionHistoryEvents();
+    }
+    initPageInteractions();
   } catch (e) {
     el.innerHTML = `
             <h3>Latest Build Notice</h3>
             <p class="notice-loading">Could not load notice JSON. Ensure <code>release-config.json</code> is available in the directory.</p>
         `;
+    if (historyEl) {
+      historyEl.innerHTML = "";
+    }
   }
 }
 
