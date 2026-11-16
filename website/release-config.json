@@ -1,23 +1,28 @@
 {
-  "version": "v41-alpha 🐾",
-  "title": "Base Update + iOS Emojis",
-  "base": "455.0.0.0.0",
-  "architecture": "armv7a + armv8a",
-  "changelogs": [
-    "Ads Removed",
-    "Clone Package Build",
-    "Config Folder Unlocked",
-    "Developer Options Enabled",
-    "Build Expired Popup Removed"
-  ],
-  "downloads": {
-    "v7a": {
-      "label": "v7a",
-      "url": "https://zdrive.to/RMKGJlbP31oP"
+  "releases": [
+    {
+      "version": "v41-alpha 🐾",
+      "base": "455.0.0.0.0",
+      "downloads": {
+        "v7a": "https://zdrive.to/RMKGJlbP31oP",
+        "v8a": "https://zdrive.to/obj3j4NAGDxJ"
+      }
     },
-    "v8a": {
-      "label": "v8a",
-      "url": "https://zdrive.to/obj3j4NAGDxJ"
+    {
+      "version": "v39 🐾",
+      "base": "452.0.0.0.0",
+      "downloads": {
+        "v7a": "https://zdrive.to/RMKGJo61m1oP",
+        "v8a": "https://zdrive.to/b5Ozdl9azB8L"
+      }
+    },
+    {
+      "version": "v38 🐾",
+      "base": "440.0.0.0.0",
+      "downloads": {
+        "v7a": "https://example.com/pawgram-v38-v7a.apk",
+        "v8a": "https://example.com/pawgram-v38-v8a.apk"
+      }
     }
-  }
+  ]
 }
