@@ -179,35 +179,31 @@ const pages = {
 
 // --- UI Components Generation ---
 function renderNav(activeId) {
-  const navLinks = navItems
-    .map(
-      (item) =>
-        `<a href="#${item.id}" class="${item.id === activeId ? "active" : ""}"><i class="fa-solid ${item.icon}"></i> ${item.label}</a>`,
-    )
-    .join("");
-  const mobLinks = navItems
-    .map(
-      (item) =>
-        `<a href="#${item.id}" class="mob-link ${item.id === activeId ? "active" : ""}"><i class="fa-solid ${item.icon}" style="color:var(--primary)"></i> ${item.label}</a>`,
-    )
+  const bottomTabs = navItems
+    .map((item) => {
+      const isActive = item.id === activeId;
+      return `
+        <a href="#${item.id}" class="bottom-nav-item${isActive ? " active" : ""}"${isActive ? ' aria-current="page"' : ""}>
+            <span class="bottom-nav-icon"><i class="fa-solid ${item.icon}" aria-hidden="true"></i></span>
+            <span class="bottom-nav-label">${item.label}</span>
+        </a>`;
+    })
     .join("");
 
   return `
-    <nav>
+    <header class="top-nav">
         <a class="logo" href="#home" aria-label="PawGram Home">
             <div style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 14px; background: var(--ig-gradient); box-shadow: 0 10px 30px rgba(131, 58, 180, 0.32);">
                 <i class="fa-solid fa-paw" style="color: #fff; font-size: 1.2rem;"></i>
             </div>
             PawGram
         </a>
-        <div class="nav-links">${navLinks}</div>
-        <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+    </header>
+    <nav class="bottom-nav" id="bottomNav" aria-label="Primary navigation">
+        <div class="bottom-nav-list">
+            ${bottomTabs}
+        </div>
     </nav>
-    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
-        ${mobLinks}
-    </div>
     `;
 }
 
@@ -284,6 +280,19 @@ const CONSTANT_RELEASE_META = Object.freeze({
   ]),
 });
 
+function inferArchitecture(downloads) {
+  if (!downloads || typeof downloads !== "object" || Array.isArray(downloads)) {
+    return CONSTANT_RELEASE_META.architecture;
+  }
+  const keys = Object.keys(downloads).map((k) => k.toLowerCase());
+  const hasV7a = keys.includes("v7a") || keys.includes("armv7a");
+  const hasV8a = keys.includes("v8a") || keys.includes("armv8a");
+  if (hasV7a && hasV8a) return "armv7a + armv8a";
+  if (hasV7a) return "armv7a";
+  if (hasV8a) return "armv8a";
+  return CONSTANT_RELEASE_META.architecture;
+}
+
 function normalizeReleases(data) {
   const jsonDefaults =
     data && typeof data === "object" && !Array.isArray(data) && data.defaults
@@ -305,6 +314,10 @@ function normalizeReleases(data) {
       ...CONSTANT_RELEASE_META,
       ...jsonDefaults,
       ...item,
+      architecture:
+        item.architecture ||
+        jsonDefaults.architecture ||
+        inferArchitecture(item.downloads),
       base: item.base || item.versionCode || "",
       changelogs: CONSTANT_RELEASE_META.changelogs,
     }))
@@ -317,8 +330,12 @@ function getDownloadEntries(downloads) {
     return downloads
       .map((item, idx) =>
         typeof item === "string"
-          ? { label: `Download ${idx + 1}`, url: item }
-          : item,
+          ? { label: `Download ${idx + 1}`, url: item, file: "" }
+          : {
+              label: item.label || `Download ${idx + 1}`,
+              url: item.url,
+              file: item.file || item.filename || "",
+            },
       )
       .filter((item) => item && item.url);
   }
@@ -329,10 +346,11 @@ function getDownloadEntries(downloads) {
       )
       .map(([key, value]) =>
         typeof value === "string"
-          ? { label: key, url: value }
+          ? { label: key, url: value, file: "" }
           : {
               label: value.label || key,
               url: value.url,
+              file: value.file || value.filename || "",
             },
       );
   }
@@ -377,7 +395,7 @@ function renderLatestReleaseCard(release) {
                 ${downloads
                   .map(
                     (dl) =>
-                      `<a class="btn btn-primary" href="${escapeHtml(dl.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(dl.label)}</a>`,
+                      `<a class="btn btn-primary" href="${escapeHtml(dl.url)}" target="_blank" rel="noopener"${dl.file ? ` title="${escapeHtml(dl.file)}"` : ""}><i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="download-btn-text"><span>${escapeHtml(dl.label)}</span>${dl.file ? `<small class="download-btn-file">${escapeHtml(dl.file)}</small>` : ""}</span></a>`,
                   )
                   .join("")}
             </div>`
@@ -425,7 +443,7 @@ function renderOlderReleaseItem(release) {
                     ${downloads
                       .map(
                         (dl) =>
-                          `<a class="btn btn-secondary" href="${escapeHtml(dl.url)}" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> ${escapeHtml(dl.label)}</a>`,
+                          `<a class="btn btn-secondary" href="${escapeHtml(dl.url)}" target="_blank" rel="noopener"${dl.file ? ` title="${escapeHtml(dl.file)}"` : ""}><i class="fa-solid fa-download"></i> <span class="download-btn-text"><span>${escapeHtml(dl.label)}</span>${dl.file ? `<small class="download-btn-file">${escapeHtml(dl.file)}</small>` : ""}</span></a>`,
                       )
                       .join("")}
                 </div>`
@@ -448,12 +466,16 @@ function getFilteredOlderReleases() {
   const q = versionHistoryState.query.trim().toLowerCase();
   if (!q) return versionHistoryState.releases;
   return versionHistoryState.releases.filter((release) => {
+    const downloadText = getDownloadEntries(release.downloads)
+      .map((dl) => `${dl.label} ${dl.file}`)
+      .join(" ");
     const haystack = [
       release.version,
       release.title,
       release.base,
       release.architecture,
       release.date || release.releaseDate,
+      downloadText,
     ]
       .filter(Boolean)
       .join(" ")
@@ -1386,37 +1408,6 @@ function initGlobalEvents() {
       window.scrollTo({ top: 0, behavior: "smooth" }),
     );
   }
-
-  // Navigation Toggle Logic
-  const navToggle = document.getElementById("navToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  if (navToggle && mobileMenu) {
-    const closeMenu = () => {
-      navToggle.classList.remove("open");
-      mobileMenu.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-    };
-
-    navToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = mobileMenu.classList.toggle("open");
-      navToggle.classList.toggle("open", isOpen);
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!navToggle.contains(e.target) && !mobileMenu.contains(e.target))
-        closeMenu();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-
-    // Make closeMenu accessible to router
-    window.closeMobileMenu = closeMenu;
-  }
 }
 
 function initPageInteractions() {
@@ -1450,12 +1441,15 @@ function updateNavActiveState(fullHash) {
   const parts = fullHash.split("/").filter(Boolean);
   const root = parts[0] || "home";
 
-  document.querySelectorAll(".nav-links a, .mobile-menu a").forEach((link) => {
+  document.querySelectorAll(".bottom-nav-item").forEach((link) => {
     const href = link.getAttribute("href");
-    link.classList.toggle(
-      "active",
-      href === `#${root}` || href === `#${fullHash}`,
-    );
+    const isActive = href === `#${root}` || href === `#${fullHash}`;
+    link.classList.toggle("active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 
   if (root === "wiki") {
@@ -1495,9 +1489,8 @@ function router() {
     document.getElementById("nav-container").innerHTML = renderNav(root);
     document.getElementById("footer-container").innerHTML = renderFooter();
     initGlobalEvents();
-  } else {
-    updateNavActiveState(fullHash);
   }
+  updateNavActiveState(fullHash);
 
   // Determine active view content
   let content = "";
@@ -1537,7 +1530,6 @@ function router() {
   document.getElementById("app-content").innerHTML = content;
 
   // Cleanup & Post-Render hooks
-  if (window.closeMobileMenu) window.closeMobileMenu();
   window.scrollTo(0, 0);
 
   // Defer observation slightly to ensure DOM paints first
