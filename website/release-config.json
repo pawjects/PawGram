@@ -4,24 +4,559 @@
       "version": "v41-alpha 🐾",
       "base": "455.0.0.0.0",
       "downloads": {
-        "v7a": "https://zdrive.to/RMKGJlbP31oP",
-        "v8a": "https://zdrive.to/obj3j4NAGDxJ"
+        "v7a": {
+          "file": "PawGram_v7a_v41_clone.apk",
+          "url": "https://zdrive.to/RMKGJlbP31oP"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v41_clone.apk",
+          "url": "https://zdrive.to/obj3j4NAGDxJ"
+        }
+      }
+    },
+    {
+      "version": "v40 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v40_clone.apk",
+          "url": "https://zdrive.to/gXeGOKVKGAa7"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v40_clone.apk",
+          "url": "https://zdrive.to/qLQ368OPG19j"
+        }
       }
     },
     {
       "version": "v39 🐾",
       "base": "452.0.0.0.0",
       "downloads": {
-        "v7a": "https://zdrive.to/RMKGJo61m1oP",
-        "v8a": "https://zdrive.to/b5Ozdl9azB8L"
+        "v7a": {
+          "file": "PawGram_v7a_v39_clone.apk",
+          "url": "https://zdrive.to/RMKGJo61m1oP"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v39_clone.apk",
+          "url": "https://zdrive.to/b5Ozdl9azB8L"
+        }
       }
     },
     {
       "version": "v38 🐾",
-      "base": "440.0.0.0.0",
       "downloads": {
-        "v7a": "https://example.com/pawgram-v38-v7a.apk",
-        "v8a": "https://example.com/pawgram-v38-v8a.apk"
+        "v7a": {
+          "file": "PawGram_v7a_v38_clone.apk",
+          "url": "https://zdrive.to/EL73ggQ839Ba"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v38_clone.apk",
+          "url": "https://zdrive.to/b5OzdEQOGB8L"
+        }
+      }
+    },
+    {
+      "version": "v37 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v37_clone.apk",
+          "url": "https://zdrive.to/LK0G16YJm917"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v37_clone.apk",
+          "url": "https://zdrive.to/2bJG8gY5zOBE"
+        }
+      }
+    },
+    {
+      "version": "v36 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v36_clone.apk",
+          "url": "https://zdrive.to/ex5z2Yvn3Kqk"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v36_clone.apk",
+          "url": "https://zdrive.to/BnkmWBQ2GR0y"
+        }
+      }
+    },
+    {
+      "version": "v35 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v35_clone (1).apk",
+          "url": "https://zdrive.to/0KezklEjGD1X"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v35_clone.apk",
+          "url": "https://zdrive.to/dZxG5Y4YGVjK"
+        }
+      }
+    },
+    {
+      "version": "v34 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v34_clone.apk",
+          "url": "https://zdrive.to/jJD3V887Ga5Q"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v34_clone.apk",
+          "url": "https://zdrive.to/ex5z2AAy3Kqk"
+        }
+      }
+    },
+    {
+      "version": "v33 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v33_clone.apk",
+          "url": "https://zdrive.to/ex5z2aQ83Kqk"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v33_clone.apk",
+          "url": "https://zdrive.to/jJD3Vk5Oza5Q"
+        }
+      }
+    },
+    {
+      "version": "v32 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v32_clone.apk",
+          "url": "https://zdrive.to/jJD3VlB0Ga5Q"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v32_clone.apk",
+          "url": "https://zdrive.to/ex5z26jezKqk"
+        }
+      }
+    },
+    {
+      "version": "v31 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v31_clone.apk",
+          "url": "https://zdrive.to/jar3XDLj32dD"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v31_clone.apk",
+          "url": "https://zdrive.to/dkD3YvRAzLQK"
+        }
+      }
+    },
+    {
+      "version": "v30 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v30_clone.apk",
+          "url": "https://zdrive.to/LJlGnK56m15w"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v30_clone.apk",
+          "url": "https://zdrive.to/5pVzNK7JG7wv"
+        }
+      }
+    },
+    {
+      "version": "v29 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v29_clone.apk",
+          "url": "https://zdrive.to/qPez4y1eGOYn"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v29_clone.apk",
+          "url": "https://zdrive.to/Xkrzo1P2mBOR"
+        }
+      }
+    },
+    {
+      "version": "v28 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v28_clone.apk",
+          "url": "https://zdrive.to/M2BGwLrPmj40"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v28_clone.apk",
+          "url": "https://zdrive.to/2WVGrWOWmkx7"
+        }
+      }
+    },
+    {
+      "version": "v27 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v27_clone.apk",
+          "url": "https://zdrive.to/5pVzNAgZ37wv"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v27_clone.apk",
+          "url": "https://zdrive.to/9AqGQZJJmMn6"
+        }
+      }
+    },
+    {
+      "version": "v26 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v26_v7a_clone.apk",
+          "url": "https://zdrive.to/2WVGr8p03kx7"
+        },
+        "v8a": {
+          "file": "PawGram_v26_v8a_clone.apk",
+          "url": "https://zdrive.to/EL73g0nyz9Ba"
+        }
+      }
+    },
+    {
+      "version": "v25 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v25_clone.apk",
+          "url": "https://zdrive.to/qw1zeM5pzXyn"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v25_clone.apk",
+          "url": "https://zdrive.to/E1x3Ab7dzyk6"
+        }
+      }
+    },
+    {
+      "version": "v24 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v24_clone.apk",
+          "url": "https://zdrive.to/qPez4BNemOYn"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v24_clone.apk",
+          "url": "https://zdrive.to/Xkrzooa2zBOR"
+        }
+      }
+    },
+    {
+      "version": "v23 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v23_clone.apk",
+          "url": "https://zdrive.to/LJlGng1Zm15w"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v23_clone.apk",
+          "url": "https://zdrive.to/wgWGq5JDG4oy"
+        }
+      }
+    },
+    {
+      "version": "v22 🐾",
+      "base": "431.0.0.0.8",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v22_clone.apk",
+          "url": "https://zdrive.to/0JgG7BlZzoYW"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v22_clone.apk",
+          "url": "https://zdrive.to/0PdzyBv0GeAR"
+        }
+      }
+    },
+    {
+      "version": "v21 🐾",
+      "base": "429.0.0.0.62",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v21_clone.apk",
+          "url": "https://zdrive.to/gXeGORKNzAa7"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v21_clone.apk",
+          "url": "https://zdrive.to/qLQ36p8EG19j"
+        }
+      }
+    },
+    {
+      "version": "v20 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v20_clone.apk",
+          "url": "https://zdrive.to/l5YzMKb9myOA"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v20_clone.apk",
+          "url": "https://zdrive.to/1RgzRjvZzbpB"
+        }
+      }
+    },
+    {
+      "version": "v19 🐾",
+      "base": "428.0.0.0.0",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v19_clone.apk",
+          "url": "https://zdrive.to/BnkmWwn1mR0y"
+        }
+      }
+    },
+    {
+      "version": "v18 🐾",
+      "base": "426.0.0.0.49",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v18_clone.apk",
+          "url": "https://zdrive.to/XLJlGnMAz15w"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v18_clone.apk",
+          "url": "https://zdrive.to/0wgWGqAyG4oy"
+        }
+      }
+    },
+    {
+      "version": "v17 🐾",
+      "base": "425.0.0.0.53",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v17_clone.apk",
+          "url": "https://zdrive.to/AY2xm0NqzRO1"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v17_clone.apk",
+          "url": "https://zdrive.to/1E9Qz9N0GOL2"
+        }
+      }
+    },
+    {
+      "version": "v16 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v16_clone.apk",
+          "url": "https://zdrive.to/WqPez4NqmOYn"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v16_clone.apk",
+          "url": "https://zdrive.to/vXkrzoaYmBOR"
+        }
+      }
+    },
+    {
+      "version": "v15 🐾",
+      "base": "425.0.0.0.0",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v15_clone.apk",
+          "url": "https://zdrive.to/YE1x3ANdzyk6"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v15_clone.apk",
+          "url": "https://zdrive.to/8qw1ze7pmXyn"
+        }
+      }
+    },
+    {
+      "version": "v14 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v14_clone.apk",
+          "url": "https://zdrive.to/Zl76mZWx3anY"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v14_clone.apk",
+          "url": "https://zdrive.to/Qrk9zKB430lY"
+        }
+      }
+    },
+    {
+      "version": "v13 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v13_clone.apk",
+          "url": "https://zdrive.to/v1RgzRQZ3bpB"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v13_clone.apk",
+          "url": "https://zdrive.to/0l5YzMQ9zyOA"
+        }
+      }
+    },
+    {
+      "version": "v12 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v12_clone.apk",
+          "url": "https://zdrive.to/vPbe3PQKzlX6"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v12_clone.apk",
+          "url": "https://zdrive.to/P0Kezk6e3D1X"
+        }
+      }
+    },
+    {
+      "version": "v11.1 🐾",
+      "downloads": {
+        "v8a": {
+          "file": "PawGram_v8a_v11.1_clone.apk",
+          "url": "https://zdrive.to/O9QWmpwJGEB6"
+        }
+      }
+    },
+    {
+      "version": "v11 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v11_clone.apk",
+          "url": "https://zdrive.to/nZ9dzBZ5zk1b"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v11_clone.apk",
+          "url": "https://zdrive.to/db5OzdQ9GB8L"
+        }
+      }
+    },
+    {
+      "version": "v10 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v10_clone.apk",
+          "url": "https://zdrive.to/Q2WVGrggmkx7"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v10_clone.apk",
+          "url": "https://zdrive.to/lvgKGxp8G8Qn"
+        }
+      }
+    },
+    {
+      "version": "v9 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v9_clone.apk",
+          "url": "https://zdrive.to/A0rpmvdyzRgZ"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v9_clone.apk",
+          "url": "https://zdrive.to/DM2BGwjpzj40"
+        }
+      }
+    },
+    {
+      "version": "v8 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v8_clone.apk",
+          "url": "https://zdrive.to/EqLQ36glz19j"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v8_clone.apk",
+          "url": "https://zdrive.to/ygXeGOQj3Aa7"
+        }
+      }
+    },
+    {
+      "version": "v7.1 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v7.1_clone.apk",
+          "url": "https://zdrive.to/EBnkmWQYzR0y"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v7.1_clone.apk",
+          "url": "https://zdrive.to/KZvqzllBzaD2"
+        }
+      }
+    },
+    {
+      "version": "v6 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v6_clone.apk",
+          "url": "https://zdrive.to/kjJD3VQ7ma5Q"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v6_clone.apk",
+          "url": "https://zdrive.to/gex5z2vyzKqk"
+        }
+      }
+    },
+    {
+      "version": "v5 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v5_clone.apk",
+          "url": "https://zdrive.to/vdZxG5rRmVjK"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v5_clone.apk",
+          "url": "https://zdrive.to/Z5pVzNQV37wv"
+        },
+        "iOS Emojis Edition": {
+          "file": "PawGram_v5_iOS_Emojis_Edition.apk",
+          "url": "https://zdrive.to/0wgWGqrwm4oy"
+        }
+      }
+    },
+    {
+      "version": "v4 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGram_v7a_v4_clone.apk",
+          "url": "https://zdrive.to/1E9Qz9J0GOL2"
+        },
+        "v8a": {
+          "file": "PawGram_v8a_v4_clone.apk",
+          "url": "https://zdrive.to/DLK0G1D4z917"
+        }
+      }
+    },
+    {
+      "version": "v3.1 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v3.1_clone.apk",
+          "url": "https://zdrive.to/vXkrzoEYmBOR"
+        }
+      }
+    },
+    {
+      "version": "v3 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v3_clone.apk",
+          "url": "https://zdrive.to/8qw1zeQpzXyn"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v3_clone.apk",
+          "url": "https://zdrive.to/WqPez4wq3OYn"
+        }
+      }
+    },
+    {
+      "version": "v2 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v2_clone.apk",
+          "url": "https://zdrive.to/Zl76mZLxzanY"
+        },
+        "v8a": {
+          "file": "PawGramv8a_v2_clone.apk",
+          "url": "https://zdrive.to/Qrk9zK84G0lY"
+        }
+      }
+    },
+    {
+      "version": "v1 🐾",
+      "downloads": {
+        "v7a": {
+          "file": "PawGramv7a_v1_clone.apk",
+          "url": "https://zdrive.to/v1RgzRXZmbpB"
+        },
+        "v8a": {
+          "file": "PawGrav8a_v1_clone.apk",
+          "url": "https://zdrive.to/0l5YzMX93yOA"
+        }
       }
     }
   ]
